@@ -1,11 +1,12 @@
 import './App.css'
+import Product from './components/Product'
 
 function App() {
 
   return (
-    <>
-      <h1 className='text-5xl font-bold'>Prueba</h1>
-    </>
+    <div className='bg-gradient-to-r from-blue-100 to-sky-200 h-screen w-screen flex justify-center items-center'>
+      <Product />
+    </div>
   )
 }
 
