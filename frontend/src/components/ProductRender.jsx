@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 const ProductRender = (props) => {
 
-    const { semifinisheds, selectedSemifinished } = props;
-
-    useEffect(() => {
-        console.log(semifinisheds)
-    }, [])
+    const { selectedSemifinished } = props;
 
     return (
         <div className='flex flex-col h-fit w-1/4'>

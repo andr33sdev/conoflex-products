@@ -27,15 +27,19 @@ const CommandTable = (props) => {
     const handleOpenProductionHistorial = () => setOpenProductionHistorial(true);
     const handleCloseProductionHistorial = () => setOpenProductionHistorial(false);
 
+    const extractNames = () => {
+        const names = semifinisheds.map(x => x.name);
+        return names;
+    }
+
     return (
         <div className='w-fit h-fit grid grid-cols-3 gap-5'>
             <div className='col-span-3'>
                 <Autocomplete
-                    defaultValue={"King Cone Light Semiflexible"}
                     disablePortal
-                    options={semifinisheds.map(semifinished => [semifinished.name]) || ""}
+                    options={extractNames()}
                     sx={{ width: 320 }}
-                    renderInput={(params) => <TextField {...params} label="Articulo" />}
+                    renderInput={(params) => <TextField {...params} label="Escribe el artículo" />}
                     onChange={handleChange}
                 />
             </div>

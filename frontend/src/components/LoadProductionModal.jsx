@@ -53,7 +53,8 @@ const LoadProductionModal = (props) => {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <form className="w-full max-w-sm" onSubmit={handleSubmit}>
+                <form className="w-full max-w-sm space-y-5" onSubmit={handleSubmit}>
+                    <span className='text-lg'>Ingresa la cantidad producida</span>
                     <div className="flex items-center border-b border-slate-500 py-2">
                         <input className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="number" placeholder="Cantidad" aria-label="Full name"
                             onChange={handleChange}
