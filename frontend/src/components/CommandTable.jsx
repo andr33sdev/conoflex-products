@@ -7,8 +7,8 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import BuildIcon from '@mui/icons-material/Build';
 import TextField from '@mui/material/TextField';
 
-import LoadProductionModal from './LoadProductionModal';
 import ProductEngineeringModal from './ProductEngineeringModal';
+import LoadProductionModal from './modals/LoadProductionModal';
 
 
 const CommandTable = (props) => {
@@ -27,10 +27,7 @@ const CommandTable = (props) => {
     const handleOpenProductionHistorial = () => setOpenProductionHistorial(true);
     const handleCloseProductionHistorial = () => setOpenProductionHistorial(false);
 
-    const extractNames = () => {
-        const names = semifinisheds.map(x => x.name);
-        return names;
-    }
+    const extractNames = () => semifinisheds.map(semifinished => semifinished.name);
 
     return (
         <div className='w-fit h-fit grid grid-cols-3 gap-5'>
@@ -68,7 +65,7 @@ const CommandTable = (props) => {
                 <Button variant="outlined" startIcon={<UploadIcon />} onClick={handleOpenLoadProductionModal} size='medium'>
                     Abrir
                 </Button>
-                <LoadProductionModal openLoadProductionModal={openLoadProductionModal} handleCloseLoadProductionModal={handleCloseLoadProductionModal} selectedSemifinished={selectedSemifinished} setSelectedSemifinished={setSelectedSemifinished}/>
+                <LoadProductionModal openLoadProductionModal={openLoadProductionModal} handleCloseLoadProductionModal={handleCloseLoadProductionModal} selectedSemifinished={selectedSemifinished} setSelectedSemifinished={setSelectedSemifinished} />
             </div>
             <div className='bg-gradient-to-r from-blue-200 to-sky-200 rounded-2xl h-32 w-80 p-5 flex flex-col shadow-md space-y-3'>
                 <span className='text-xl font-bold uppercase text-slate-700'>Historial producciones</span>

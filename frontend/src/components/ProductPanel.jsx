@@ -24,7 +24,7 @@ const ProductPanel = () => {
         }
     };
 
-    const fetchSemifinishedById = async (_id) => {
+    const fetchSemifinishedById = async (_id = semifinisheds[0]._id) => { // Si no se asigna un id, por defecto es el id del primer semielaborado del array
         try {
             const response = await axios.get(
                 `http://localhost:3000/api/semifinished/${_id}`
@@ -36,7 +36,7 @@ const ProductPanel = () => {
     }
 
     const handleChange = (event, value) => {
-        const id = semifinisheds.find(semifinished => semifinished.name == value)._id;
+        const id = semifinisheds.find(semifinished => semifinished.name == value)?._id;
         fetchSemifinishedById(id);
     }
 
