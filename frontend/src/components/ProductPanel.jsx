@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
 
-import CommandTable from './CommandTable';
+import ProductCommandTable from './ProductCommandTable';
 import ProductRender from './ProductRender';
 
 const ProductPanel = () => {
@@ -47,7 +47,7 @@ const ProductPanel = () => {
     return (
         <div className='flex w-full flex-col space-y-36'>
             <div className='flex justify-around' >
-                <CommandTable semifinisheds={semifinisheds} selectedSemifinished={selectedSemifinished} setSelectedSemifinished={setSelectedSemifinished} handleChange={handleChange} />
+                <ProductCommandTable semifinisheds={semifinisheds} selectedSemifinished={selectedSemifinished} setSelectedSemifinished={setSelectedSemifinished} handleChange={handleChange} />
                 <ProductRender selectedSemifinished={selectedSemifinished} />
             </div>
         </div >

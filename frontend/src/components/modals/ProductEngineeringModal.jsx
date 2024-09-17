@@ -28,8 +28,8 @@ const ProductEngineeringModal = (props) => {
         >
             <Box sx={style}>
                 <h2>Ingeniería del producto</h2>
-                <form class="w-full max-w-sm">
-                    <div class="flex items-center border-b border-slate-500 py-2">
+                <form className="w-full max-w-sm">
+                    <div className="flex items-center border-b border-slate-500 py-2">
                         Esto es una prueba, acá va la ingeniería
                     </div>
                 </form>
