@@ -15,6 +15,7 @@ const ProductPanel = () => {
                 "http://localhost:3000/api/semifinished"
             );
             setSemifinisheds(response.data);
+            setSelectedSemifinished(response.data[0])
         } catch (error) {
             console.error("Error fetching semifinisheds", error);
         }
@@ -42,12 +43,12 @@ const ProductPanel = () => {
     }, []);
 
     return (
-        <div className='flex w-full flex-col space-y-36' >
-            <div className='flex justify-around'>
-                <CommandTable semifinisheds={semifinisheds} selectedSemifinished={selectedSemifinished} handleChange={handleChange} />
-                <ProductRender selectedSemifinished={selectedSemifinished} />
-            </div>
-        </div>
+        <div className='flex w-full flex-col space-y-36'>
+                <div className='flex justify-around' >
+                    <CommandTable semifinisheds={semifinisheds} selectedSemifinished={selectedSemifinished} setSelectedSemifinished={setSelectedSemifinished} handleChange={handleChange} />
+                    <ProductRender semifinisheds={semifinisheds} selectedSemifinished={selectedSemifinished} />
+                </div>
+        </div >
     )
 }
 
