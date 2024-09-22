@@ -13,12 +13,9 @@ const ProductPanel = () => {
         try {
             const response = await axios.get(
                 "http://localhost:3000/api/semifinished"
-            ).then( // esta es una forma .then
-                response => {
-                    setSemifinisheds(response.data)
-                    setSelectedSemifinished(response.data[0])
-                }
             )
+            setSemifinisheds(response.data)
+            setSelectedSemifinished(response.data[0])
         } catch (error) {
             console.error("Error fetching semifinisheds", error);
         }
@@ -47,7 +44,7 @@ const ProductPanel = () => {
     return (
         <div className='flex w-full flex-col space-y-36'>
             <div className='flex justify-around' >
-                <ProductCommandTable semifinisheds={semifinisheds} selectedSemifinished={selectedSemifinished} setSelectedSemifinished={setSelectedSemifinished} handleChange={handleChange} />
+                <ProductCommandTable semifinisheds={semifinisheds} selectedSemifinished={selectedSemifinished} setSelectedSemifinished={setSelectedSemifinished} handleChangeProduct={handleChange} />
                 <ProductRender selectedSemifinished={selectedSemifinished} />
             </div>
         </div >

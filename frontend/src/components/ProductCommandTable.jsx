@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 
 import Autocomplete from '@mui/material/Autocomplete';
 import UploadIcon from '@mui/icons-material/Upload';
@@ -11,7 +12,7 @@ import LoadProductionModal from './modals/LoadProductionModal';
 import ProductCard from './ProductCard';
 
 const ProductCommandTable = (props) => {
-    const { semifinisheds, selectedSemifinished, setSelectedSemifinished, handleChange } = props;
+    const { semifinisheds, selectedSemifinished, setSelectedSemifinished, handleChangeProduct } = props;
 
     const [openLoadProductionModal, setOpenLoadProductionModal] = React.useState(false);
     const handleOpenLoadProductionModal = () => setOpenLoadProductionModal(true);
@@ -25,6 +26,36 @@ const ProductCommandTable = (props) => {
     const handleOpenProductionHistorial = () => setOpenProductionHistorial(true);
     const handleCloseProductionHistorial = () => setOpenProductionHistorial(false);
 
+    const [rawMaterials, setRawMaterials] = useState([]);
+    const [selectedRawMaterial, setSelectedRawMaterial] = useState([]);
+
+    const fetchRawMaterials = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:3000/api/raw-material"
+            )
+            setRawMaterials(response.data);
+            setSelectedRawMaterial(response.data[0])
+        } catch (error) {
+            console.error("Error fetching raw materials", error);
+        }
+    }
+
+    const fetchRawMaterialById = async (_id = rawMaterials[0]._id) => { // Si no se asigna un id, por defecto es el id del primer semielaborado del array
+        try {
+            const response = await axios.get(
+                `http://localhost:3000/api/raw-material/${_id}`
+            )
+            setSelectedRawMaterial(response.data); // otra forma sin .then
+        } catch (error) {
+            console.error("Error fetching raw material by id", error);
+        }
+    }
+
+    useEffect(() => {
+        fetchRawMaterials();
+    }, [])
+
     return (
         <div className='w-fit h-fit grid grid-cols-3 gap-5'>
             <div className='col-span-3'>
@@ -33,7 +64,7 @@ const ProductCommandTable = (props) => {
                     options={semifinisheds.map(semifinished => semifinished.name)}
                     sx={{ width: 320 }}
                     renderInput={(params) => <TextField {...params} label="Escribe el artículo" />}
-                    onChange={handleChange}
+                    onChange={handleChangeProduct}
                 />
             </div>
             <ProductCard title={"Stock"} info={selectedSemifinished.stock} isClickable={false} />
@@ -48,7 +79,7 @@ const ProductCommandTable = (props) => {
                 selectedSemifinished={selectedSemifinished}
                 setSelectedSemifinished={setSelectedSemifinished}
             />
-            <ProductEngineeringModal openProductEngineering={openProductEngineering} handleCloseProductEngineering={handleCloseProductEngineering} />
+            <ProductEngineeringModal fetchRawMaterialById={fetchRawMaterialById} selectedSemifinished={selectedSemifinished} rawMaterials={rawMaterials} selectedRawMaterial={selectedRawMaterial} setSelectedRawMaterial={setSelectedRawMaterial} openProductEngineering={openProductEngineering} handleCloseProductEngineering={handleCloseProductEngineering} />
         </div>
     )
 }
