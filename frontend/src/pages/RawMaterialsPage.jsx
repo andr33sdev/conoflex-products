@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
 
-import RawMaterialCommandTable from './RawMaterialCommandTable';
-import RawMaterialRender from './RawMaterialRender';
+import RawMaterialCommandTable from '../components/RawMaterialCommandTable';
+import RawMaterialRender from '../components/RawMaterialRender';
 
-const RawMaterialPanel = () => {
+const RawMaterialsPage = () => {
 
     const [rawMaterials, setRawMaterials] = useState([]);
     const [selectedRawMaterial, setSelectedRawMaterial] = useState([]);
@@ -51,4 +51,4 @@ const RawMaterialPanel = () => {
     )
 }
 
-export default RawMaterialPanel;
+export default RawMaterialsPage;
