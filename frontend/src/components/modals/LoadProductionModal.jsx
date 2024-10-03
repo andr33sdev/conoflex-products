@@ -116,7 +116,7 @@ const LoadProductionModal = (props) => {
         <div className="flex min-h-full items-end justify-center p-10 text-center sm:items-center sm:p-0">
           <DialogPanel
             transition
-            className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all"
+            className="relative transform overflow-hidden rounded-lg max-w-fit bg-white text-left shadow-xl transition-all"
           >
             <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="flex flex-col sm:flex sm:items-start">
@@ -129,7 +129,7 @@ const LoadProductionModal = (props) => {
                   onSubmit={formik.handleSubmit}
                   className="flex flex-col p-5 w-full space-y-5"
                 >
-                  <div className="flex flex-row w-full">
+                  <div className="flex flex-row w-full space-x-20">
                     <div className="space-y-5 flex flex-col w-1/2">
                       <div className="flex flex-col space-y-2">
                         <label className="text-lg">Fecha Producción</label>
@@ -181,10 +181,22 @@ const LoadProductionModal = (props) => {
                       </div>
                     </div>
                     <div className="flex flex-col w-1/2 text-center">
-                      <h3 className="text-lg border-b-2 mb-2">
+                      <h3 className="text-base border-b-2 mb-2 font-bold">
                         Cantidad actual del producto
                       </h3>
-                      <span>{selectedSemifinished.stock} unidades</span>
+                      <span className="text-sm">{selectedSemifinished.stock} unidades</span>
+
+                      <h3 className="text-base border-b-2 mb-2 mt-8 font-bold">
+                        Fórmula del producto
+                      </h3>
+                      <ul className="text-sm space-y-2">
+                        {selectedSemifinished.materials && selectedSemifinished.materials.length > 0 ? selectedSemifinished.materials.map((material) => (
+                          <div key={material._id}>
+                            <li>{material.name}</li>
+                            <li>Cantidad: {material.qty}</li>
+                          </div>
+                        )): <span className="text-red-600 font-bold">Cuidado. Este producto no tiene una fórmula asignada</span>}
+                      </ul>
                     </div>
                   </div>
                   <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
