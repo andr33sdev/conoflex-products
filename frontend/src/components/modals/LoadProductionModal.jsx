@@ -21,10 +21,7 @@ const LoadProductionModal = (props) => {
       disapprovedAmount: 0,
     },
     onSubmit: async (values) => {
-      calculateSpentRawMaterial(); // Asegúrate de que esto esté actualizando spentRawMaterials correctamente
-
-      // Aquí puedes esperar un momento para que el estado se actualice
-      await new Promise((resolve) => setTimeout(resolve, 100)); // Espera breve
+      calculateSpentRawMaterial();
 
       const semifinishedId = selectedSemifinished._id;
       try {
@@ -55,13 +52,23 @@ const LoadProductionModal = (props) => {
           console.log("Raw material updated:", rawMaterialResponse.data);
         }
 
-        setSelectedSemifinished((prev) => ({
-          ...prev,
-          stock: Number(prev.stock) + Number(formik.values.approvedAmount),
-        }));
+        const response = await axios.post(
+          "http://localhost:3000/api/productions?sort=-date",
+          {
+            date: formik.values.date,
+            operator: formik.values.operator,
+            approvedQty: formik.values.approvedAmount,
+            disapprovedQty: formik.values.disapprovedAmount,
+            productCode: selectedSemifinished.code,
+            color: selectedSemifinished.color,
+            process: selectedSemifinished.process,
+          }
+        );
+        console.log("Production created:", response.data);
+
         handleCloseLoadProductionModal();
       } catch (error) {
-        console.error("Error updating semifinished:", error);
+        console.error("Error in the transaction", error);
       }
     },
   });
@@ -195,7 +202,7 @@ const LoadProductionModal = (props) => {
                             <li>{material.name}</li>
                             <li>Cantidad: {material.qty}</li>
                           </div>
-                        )): <span className="text-red-600 font-bold">Cuidado. Este producto no tiene una fórmula asignada</span>}
+                        )) : <span className="text-red-600 font-bold">Cuidado. Este producto no tiene una fórmula asignada</span>}
                       </ul>
                     </div>
                   </div>

@@ -29,7 +29,7 @@ const ProductsPage = () => {
     }, []);
 
     return (
-        <div className='flex w-full flex-col space-y-36'>
+        <div className='flex w-full flex-col space-y-36 items-center justify-center'>
             <div className='flex justify-around' >
                 <ProductCommandTable semifinisheds={semifinisheds} selectedSemifinished={selectedSemifinished} setSelectedSemifinished={setSelectedSemifinished} handleChangeProduct={handleChange} />
                 <ProductRender selectedSemifinished={selectedSemifinished} />

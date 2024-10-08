@@ -42,7 +42,7 @@ const RawMaterialsPage = () => {
     }, [])
 
     return (
-        <div className='flex w-full flex-col space-y-36'>
+        <div className='flex w-full flex-col space-y-36 items-center justify-center'>
             <div className='flex justify-around' >
                 <RawMaterialCommandTable rawMaterials={rawMaterials} selectedRawMaterial={selectedRawMaterial} setSelectedRawMaterial={setSelectedRawMaterial} handleChange={handleChange} />
                 <RawMaterialRender selectedRawMaterial={selectedRawMaterial} />
